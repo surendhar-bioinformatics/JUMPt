@@ -40,9 +40,9 @@ We recommed to use MATLAB R2014 or above. Our program is mainly use the followin
 
 
 # Hardware Requirements
-The program can be run on either linux or windows. Atleast 8GB memory is required and requiredment of higher memory depends on size of the data.
+The program can be run on either linux or windows. Memory size of 8GB is an optimum and higher memory may required depending on size of the data.
 
-The program has been successfully tested on the following system:
+The current program has been successfully tested on the following system:
 16 GB memory
 3.3 GHz CPU processors with 6 cores
 
