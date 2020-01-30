@@ -9,7 +9,9 @@
 - Acknoledgements
 
 # Introduction
-JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis .
+JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. 
+
+JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis .
 
 # Release notes
 Version 1:
@@ -22,89 +24,33 @@ In this version
 # Software Requirements
 The program is written by a combination of Python3 and MATLAB. It should run on every system with Python3 with required modules loaded and MATLAB R2017 and above. The minimum required Perl version should be Perl 5.8 or better.
 
-Perl modules are needed:
+Python modules are needed:
 
-Parallel::ForkManager
-Statistics::Distributions
-Clone
-Excel/Writer/XLSX.pm (optional but recommended)
-To install perl modules, please refer to: http://www.cpan.org/modules/INSTALL.html
+The following python modules are required. For new user, we encourage to use Anacoda, a free and open-source distribution of the Python.
+- numpy
+- scipy
+- pandas
+- matplotlib
+- subprocess
+To install Anaconda distribution, please refer to: https://www.anaconda.com/
+
+MATLAB toolbox needed:
+We recommed to use MATLAB R2014 or above. Our program is mainly use the following toolbox other than basic toolboxes.
+- Global Optimization tool box
 
 
-#Hardware Requirements
-Starting from JUMPg_v2.3.1, the program can be run on either high performance computing systme or a single server.
+# Hardware Requirements
+The program can be run on either linux or windows. Atleast 8GB memory is required and requiredment of higher memory depends on size of the data.
 
 The program has been successfully tested on the following system:
+16 GB memory
+3.3 GHz CPU processors with 6 cores
 
-Cluster mode (key parameters: 'cluster = 1' & 'Job_Management_System = SGE'):
+# Installation
+After download the source code, you can put it in any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the required modules (associted with the program) should be placed in the same folder. Once the program is saved, you can open and run "main.py" in python console.
 
-Batch-queuing system: SGE, version 6.1u5, qsub and qstat
-128 GB memory and 64 cores on each node
-Single server mode (key parameters: 'cluster = 0' & 'processors_used = 8'):
+# Run the example
 
-32 GB memory
-2 GHz CPU processors with 8 cores
-Installation
-After download the source code, you can put it in any working directory (e.g. /home/usr/JUMPg). IMPORTANT: The folder containing all the source code needs to be accessible by each node.
-
-# INSTALLATION:
-
-step 0: unzip the source code and test data packages in the current directory by running the following commands:
-
-unzip JUMPg_v2.3.1.zip (already unzipped if downloaded from github)
-unzip exampleData_v6.2.zip
-Step 1: set up module and program paths by running the following commands:
-
-cd programs
-perl path_setup.pl
-cd ..
-Step 2: download AnnoVar annotation files by running the following commands (take human hg19 as an example):
-
-mkdir annotations
-cd annotations
-perl ../programs/c/customizedDB/annovar/annotate_variation.pl -downdb -buildver hg19 -downdb knownGene human/
-cd ..
-Step 3: prepare reference genome (FASTA format) # this file is required for splice junction and RNA 6FT analysis
-
-For model organisms, the reference genome should be available through UCSC genome browser database (http://genome.ucsc.edu/).
-
-Example command: wget http://hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/chromFa.tar.gz Concatenate all the fasta files using the following command cat *.fa > hg19_genome_raw.fa
-
-Step 4: (Optional but recommended) update uniProt-UCSC ID convertion table based on pairwise sequence alignment.
-
-For human, an updated uniProt-UCSC ID convertion table (named 'ID_convert_uniProt2UCSChg19.txt') is available in the exampleData_v6.2/ folder. This table is used to correct the UCSC downloaded table, using the following command:
-perl tools/updateIdTab.pl annotations/human/hg19_kgXref.txt exampleData_v6.2/resources/ID_convert_uniProt2UCSChg19.txt
-Input File Preparation
-(You can skip this section if you only want to run through the example.)
-
-Besides MS data, the program takes up to three types of genomics/NGS data as inputs for the customized peptide database building.
-
-For building the mutation peptide database: an AnnoVar input format file that contains the genomic locations and allele (ref/alt) information file is required.
-For building the junction peptide database: a splice junction file reported by STAR (or with equivalent format) is required.
-For building the RNA 6FT database: RNA nucleotide sequences in FASTQ format is required (can be either de novo assemebled transcripts or reference mRNA sequences).
-Users can find example input files in exampleData_v6.2.tar.gz (within the rna_database/ folder).
-
-If users process the data from RNA-seq raw reads, to assist the input file preparation process, a wrapper (called 'RNAseq_preprocess.pl' located in the tools/ folder) is provided that contains RNAseq alignment (by STAR), mutation detection (by GATK), and novel splice junction filtering.
-
-To run the wrapper, the following 3rd party software is required:
-
-STAR: https://github.com/alexdobin/STAR/releases Note that the reference genome should be index by the STAR 'genomeGenerate' module
-Picard: http://broadinstitute.github.io/picard/
-GATK: https://www.broadinstitute.org/gatk/ Note that GATK requires the reference genome to be sorted by kayrotypic order
-Samtools: http://samtools.sourceforge.net/ Only used for indexing BAM files
-Users can check each requirement by filling the parameter file of the wrapper ('RNAseq_preprocess.params' located in the tools/ folder).
-
-Once finished with the steps above, the wrapper can be executed using the following command:
-
-perl tools/RNAseq_preprocess_v1.0.0.pl RNAseq_preprocess.params <test_PE1.fq> <test_PE2.fq> <test_PE1.fq> <test_PE2.fq> Pair 1 and 2 of RNAseq FASTAQ files
-
-The wrapper will output:
-
-Mutation file in AnnoVar input format: filtered_output.annovar
-Novel splice junction file in STAR format: SJ.out.filtered2uniq.tab
-Users can take these two files as input for the JUMPg program.
-
-Run the example
 Since the program supports multistage database search analysis, we have designed a two-stage test dataset. For the 1st stage, the MS/MS spectra are searched against a peptide database pooled from uniProt, mutations and splice junctions; the matching results are filtered to ~1% false discovery rate. For the 2nd stage, the remaining high quality spectra are searched against the 6FT database.
 
 1st stage analysis:
