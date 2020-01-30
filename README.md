@@ -1,4 +1,4 @@
-#Contents of this file
+# Contents of this file
 Introduction
 Release notes
 Software Requirements
@@ -10,7 +10,7 @@ Maintainers
 # Introduction
 JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis .
 
-#Release notes
+# Release notes
 Version 1:
 
 In this version 
@@ -18,7 +18,7 @@ In this version
 2. The Lys used in protein synthesis originate from the food intake, with the rest recycled through protein degradation. 
 3. oncentration of soluble Lys is conserved, the Lys that is absorbed from the food excreted by degradation pathways. 
 
-#Software Requirements
+# Software Requirements
 The program is written by a combination of Python3 and MATLAB. It should run on every system with Python3 with required modules loaded and MATLAB R2017 and above. The minimum required Perl version should be Perl 5.8 or better.
 
 Perl modules are needed:
@@ -46,7 +46,7 @@ Single server mode (key parameters: 'cluster = 0' & 'processors_used = 8'):
 Installation
 After download the source code, you can put it in any working directory (e.g. /home/usr/JUMPg). IMPORTANT: The folder containing all the source code needs to be accessible by each node.
 
-#INSTALLATION:
+# INSTALLATION:
 
 step 0: unzip the source code and test data packages in the current directory by running the following commands:
 
