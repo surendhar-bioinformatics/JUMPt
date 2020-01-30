@@ -1,8 +1,4 @@
-# Introduction
-JUMP Software Suite (shortly JUMP) is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering and quantification.
-JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. 
-
-Contents of this file
+#Contents of this file
 Introduction
 Release notes
 Software Requirements
@@ -10,16 +6,20 @@ Hardware Requirements
 Installation
 Command Line Arguments
 Maintainers
-Release notes
-Version 2.3.6:
 
-Fixed a bug that cause program to crash when the program is used in Ubuntu system.
-Use the latest JUMP search engine (thanks to Xusheng and Ji-Hoon).
-During the 2nd stage search, some PSMs may be missed during database search because of inaccurate file calculation. This error is fixed.
-Previous version failed to generate the BED file for mutation peptides. This error is fixed.
-The PSM filtering function previously relied on a local version of clone.pm, but may lead to crash when a local clone.pm file was found with a differnt version. Now the local dependence was removed and this error should be fixed.
-Software Requirements
-The program is written by a combination of Perl and R. It should run on every system with Perl5 and R 3.1.0. The minimum required Perl version should be Perl 5.8 or better.
+# Introduction
+JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis .
+
+#Release notes
+Version 1:
+
+In this version 
+1. We assume that the overall amount of proteins in mice is unchanged over time as the mice used in this study are adult. 
+2. The Lys used in protein synthesis originate from the food intake, with the rest recycled through protein degradation. 
+3. oncentration of soluble Lys is conserved, the Lys that is absorbed from the food excreted by degradation pathways. 
+
+#Software Requirements
+The program is written by a combination of Python3 and MATLAB. It should run on every system with Python3 with required modules loaded and MATLAB R2017 and above. The minimum required Perl version should be Perl 5.8 or better.
 
 Perl modules are needed:
 
@@ -29,10 +29,8 @@ Clone
 Excel/Writer/XLSX.pm (optional but recommended)
 To install perl modules, please refer to: http://www.cpan.org/modules/INSTALL.html
 
-R module:
 
-MASS
-Hardware Requirements
+#Hardware Requirements
 Starting from JUMPg_v2.3.1, the program can be run on either high performance computing systme or a single server.
 
 The program has been successfully tested on the following system:
@@ -48,7 +46,7 @@ Single server mode (key parameters: 'cluster = 0' & 'processors_used = 8'):
 Installation
 After download the source code, you can put it in any working directory (e.g. /home/usr/JUMPg). IMPORTANT: The folder containing all the source code needs to be accessible by each node.
 
-INSTALLATION:
+#INSTALLATION:
 
 step 0: unzip the source code and test data packages in the current directory by running the following commands:
 
@@ -153,10 +151,10 @@ perl /home/usr/JUMPg_v2.3.1/programs/JUMPg_v2.3.1.pl jump_g_v2.2.stage2.params q
 
 Output: similar to the 1st stage result, the program will generate a folder named 'gnm_round2_test1' containing results in its 'publications' folder.
 
-Maintainers
+#Maintainers
 To submit bug reports and feature suggestions, please contact:
 
 surendhar Reddy Chepyala (surendharreddy.chepyala@stjude.org) and Junmin Peng (junmin.peng@stjude.org)
 
-Acknowledgement
+#Acknowledgement
 We gratefully acknowledge St. Jude Children’s Research Hospital, ALSAC (American Lebanese Syrian Associated Charities) and National Institute of Health for supporting the development of JUMP Software Suite. 
