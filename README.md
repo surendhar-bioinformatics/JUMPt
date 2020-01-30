@@ -1,11 +1,12 @@
 # Contents of this file
-Introduction
-Release notes
-Software Requirements
-Hardware Requirements
-Installation
-Command Line Arguments
-Maintainers
+- Introduction
+- Release notes
+- Software Requirements
+- Hardware Requirements
+- Installation
+- Command Line Arguments
+- Maintainers
+- Acknoledgements
 
 # Introduction
 JUMPt (JUMP-turnover) software tool is for detrmining the protein turnover rates in metabolically labeled animals using mass spectrometry(MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously. JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis .
@@ -151,10 +152,10 @@ perl /home/usr/JUMPg_v2.3.1/programs/JUMPg_v2.3.1.pl jump_g_v2.2.stage2.params q
 
 Output: similar to the 1st stage result, the program will generate a folder named 'gnm_round2_test1' containing results in its 'publications' folder.
 
-#Maintainers
+# Maintainers
 To submit bug reports and feature suggestions, please contact:
 
 surendhar Reddy Chepyala (surendharreddy.chepyala@stjude.org) and Junmin Peng (junmin.peng@stjude.org)
 
-#Acknowledgement
+# Acknowledgement
 We gratefully acknowledge St. Jude Children’s Research Hospital, ALSAC (American Lebanese Syrian Associated Charities) and National Institute of Health for supporting the development of JUMP Software Suite. 
