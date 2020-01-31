@@ -35,7 +35,7 @@ The following python modules are required. For new user, we encourage to use Ana
 To install Anaconda distribution, please refer to: https://www.anaconda.com/
 
 MATLAB toolbox needed:
-We recommed to use MATLAB R2014 or above. Our program is mainly use the following toolbox other than basic toolboxes.
+We recommed to use MATLAB R2014 (The MathWorks, Inc., Natick, Massachusetts, United States) or above version on Linux, Mac or Windows. Our program is mainly use the following toolbox other than basic toolboxes.
 - Global Optimization tool box
 
 
@@ -47,10 +47,12 @@ The current program has been successfully tested on the following system:
 3.3 GHz CPU processors with 6 cores
 
 # Installation
-After download the source code, you can put it in any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the required modules (associted with the program) should be placed in the same folder. Once the program is saved, you can open and run "main.py" in python console.
+Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associted with the program) should be placed in the same folder. Once the scripts are saved, open and run "main.py" in python console.
 
 # Run the example
 
+A testing dataset (test.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in xslx) along with full path. 
+Once the program started and expected output is saved in Results folder which is created in the wordking directory. Run time for demo on a desktop computer is about 5-10 min.
 Since the program supports multistage database search analysis, we have designed a two-stage test dataset. For the 1st stage, the MS/MS spectra are searched against a peptide database pooled from uniProt, mutations and splice junctions; the matching results are filtered to ~1% false discovery rate. For the 2nd stage, the remaining high quality spectra are searched against the 6FT database.
 
 1st stage analysis:
