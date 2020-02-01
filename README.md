@@ -6,7 +6,7 @@
 - Installation
 - Major steps in the program (Demo data set) 
 - Maintainers
-- 8.	Acknowledgements
+- Acknowledgements
 
 # Introduction
 JUMPt (JUMP-turnover) software is for determining the protein turnover rates in metabolically labeled animals using mass spectrometry (MS) data. JUMPt uses novel differential equation-based mathematical model to determine the reliable and accurate protein turnover rates. The proposed method determines the half-life of individual proteins by fitting the dynamic data of unlabeled free Lys and protein-bound Lys from individual proteins simultaneously.
