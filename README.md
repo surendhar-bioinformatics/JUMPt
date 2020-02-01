@@ -22,7 +22,7 @@ In this version
 3. oncentration of soluble Lys is conserved, the Lys that is absorbed from the food excreted by degradation pathways. 
 
 # Software Requirements
-The program is written by a combination of Python3 and MATLAB. It should run on every system with Python3 with required modules loaded and MATLAB R2017 and above. The minimum required Perl version should be Perl 5.8 or better.
+The program is written in Python3 and MATLAB language. It should run on every system with Python3 with required modules loaded and MATLAB R2017 and above. The minimum required Perl version should be Perl 5.8 or better.
 
 Python modules are needed:
 
@@ -51,9 +51,10 @@ Installation of the script is not required. Download all the scripts to any work
 
 # Run the example
 
-A testing dataset (test.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in xslx) along with full path. 
-Once the program started and expected output is saved in Results folder which is created in the wordking directory. Run time for demo on a desktop computer is about 5-10 min.
-Since the program supports multistage database search analysis, we have designed a two-stage test dataset. For the 1st stage, the MS/MS spectra are searched against a peptide database pooled from uniProt, mutations and splice junctions; the matching results are filtered to ~1% false discovery rate. For the 2nd stage, the remaining high quality spectra are searched against the 6FT database.
+A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in .xslx) along with full path. 
+During the excution of program, expected output is saved in "Results" folder which is created in the wordking directory. Run time for demo on a desktop computer is about 2-10 min depending on the system configuretation.
+
+The program perform multistep optimization to find the optimal degredation rates (turnover rates or Half-lives). The output of each step is saved in For the 1st stage, the MS/MS spectra are searched against a peptide database pooled from uniProt, mutations and splice junctions; the matching results are filtered to ~1% false discovery rate. For the 2nd stage, the remaining high quality spectra are searched against the 6FT database.
 
 1st stage analysis:
 
