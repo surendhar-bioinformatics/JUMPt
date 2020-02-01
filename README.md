@@ -4,7 +4,7 @@
 - Software Requirements
 - Hardware Requirements
 - Installation
-- Major steps in the program  
+- Major steps in the program (Demo data set) 
 - Maintainers
 - Acknoledgements
 
@@ -49,7 +49,7 @@ The current program has been successfully tested on the following system:
 # Installation
 Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associted with the program) should be placed in the same folder. Once the scripts are saved, open and run "main.py" in python console.
 
-# Run the example
+# Major steps in the program (Demo data set)
 
 A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in .xslx) along with full path. 
 During the excution of program, expected output is saved in "Results" folder which is created in the wordking directory. Run time for demo on a desktop computer is about 2-10 min depending on the system configuretation.
