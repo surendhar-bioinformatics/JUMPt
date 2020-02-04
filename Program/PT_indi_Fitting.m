@@ -34,7 +34,7 @@ for i = 1:len_P_data
     %Global Optimization using Global search
     opts        = optimoptions(@fmincon,'Algorithm','interior-point','UseParallel','always');
     problem     = createOptimProblem('fmincon','x0',param_guess,'objective',@(param)Glob_Opti_P(param, tspan, Lys_ratio, Pi_ratio, Lys_conc, EtaP_temp),'lb',lb,'ub',ub,'options',opts);
-    GlobSearch  = GlobalSearch('Display','iter','NumTrialPoints',200);%
+    GlobSearch  = GlobalSearch('Display','iter','NumTrialPoints',400);%
     [param_indFit,fval,exitflag_noUIP,output,solutions] = run(GlobSearch,problem);
     
     %Storing the parameters to an array

@@ -35,7 +35,7 @@ Prot_name{k+2}     = 'UIP';
 f_Lys_Protein_tab = array2table(Lys_P_simu,'VariableNames',Prot_name);
 writetable(f_Lys_Protein_tab,'Results\Glob_fit_res.xlsx','Sheet','traj_Lys_P');
 
-T_array = 
+
 % plot the Fitting results
 figure('visible','off'); hold on; box on; grid on; set(gca,'LineWidth',2.5); set(gca,'FontSize',14)
 plot(t, Lys_P_simu(:,1),'-r','MarkerSize',8,'MarkerEdgeColor','g','LineWidth',2);
