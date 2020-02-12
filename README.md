@@ -44,6 +44,16 @@ The current program has been successfully tested on the following system: 16 GB 
 # Installation
 Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associated with the program) should be placed in the same folder. Once the scripts are saved, open and run "main.py" in python console.
 
+# Detailed method of protein turnover calculation:
+
+In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys (Eq. 11) and individual proteins (Eq. 9) arranged into matrix form 
+$$\frac{d}{dt}\mathbf{\theta}\left(t\right)=\Gamma\mathbf{\theta}(t)$$; where the matrix \Gamma is unknown with degradation parameters ( $$\gamma_a\ ,\ \ \gamma_i and \gamma_U$$) to be determined. We rearrange the equation (11) and (9) as follows:
+$$dθALdt=γaθFL-θAL +i=1nγiηiPi[A]θPi-θAL+γUηUPUAθU-θAL#S1$$
+$$dθALdt= i=1nγiηiPi[A]θPi-γa+i=1nγiηiPi[A] + [ηUPU]AθAL #S2$$
+
+$$dθPidt=γiθAL-θPi #S3$$
+$$dθPidt=γiθAL-γiθPi #S4$$
+
 # Major steps in the program (Demo data set)
 
 A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in .xlsx) along with full path. During the execution of program, expected output is saved in "Results" folder which is created in the working directory. Run time for demo on a desktop computer is about 2-10 min depending on the system configuration.
