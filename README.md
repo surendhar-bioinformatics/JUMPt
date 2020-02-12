@@ -47,6 +47,8 @@ Installation of the script is not required. Download all the scripts to any work
 # Detailed method of protein turnover calculation:
 
 In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys (Eq. 11) and individual proteins (Eq. 9) arranged into matrix form 
+$$\int_\Omega \nabla u \cdot \nabla v~dx = \int_\Omega fv~dx$$
+
 \frac{d}{dt}\mathbf{\theta}\left(t\right)=\Gamma\mathbf{\theta}(t) ; 
 
 where the matrix \Gamma is unknown with degradation parameters ( $$\gamma_a\ ,\ \ \gamma_i and \gamma_U$$) to be determined. We rearrange the equation (11) and (9) as follows:
