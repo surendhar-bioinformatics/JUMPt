@@ -51,7 +51,7 @@ where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\ma
 
 <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\&space;&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}&plus;\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\&space;&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}&plus;\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" title="\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\ +\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}+\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" /></a>
 
 <img src="https://render.githubusercontent.com/render/math?math=\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}+\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)">
 
