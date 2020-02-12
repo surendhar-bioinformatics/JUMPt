@@ -46,11 +46,13 @@ Installation of the script is not required. Download all the scripts to any work
 
 # Detailed method of protein turnover calculation:
 
-In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys (Eq. 11) and individual proteins (Eq. 9) arranged into matrix form<img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{d}{dt}\mathbf{\theta}\left(t\right)=\Gamma\mathbf{\theta}(t)" title="S1" />
-where the matrix \Gamma is unknown with degradation parameters ( $$\gamma_a\ ,\ \ \gamma_i and \gamma_U$$) to be determined. We rearrange the equation (11) and (9) as follows:
-$$dθALdt=γaθFL-θAL +i=1nγiηiPi[A]θPi-θAL+γUηUPUAθU-θAL#S1$$
-$$dθALdt= i=1nγiηiPi[A]θPi-γa+i=1nγiηiPi[A] + [ηUPU]AθAL #S2$$
+In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys (Eq. 11) and individual proteins (Eq. 9) arranged into matrix form  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{d}{dt}\mathbf{\theta}\left(t\right)=\mathbf{G\theta}(t)" title="S1" />
+where the matrix src="https://latex.codecogs.com/svg.latex?\Large&space;\mathbf{G}" /> is unknown with degradation parameters ( $$\gamma_a\ ,\ \ \gamma_i and \gamma_U$$) to be determined. We rearrange the equation (11) and (9) as follows:
 
+
+src="https://latex.codecogs.com/svg.latex?\Large&space;dθALdt=γaθFL-θAL +i=1nγiηiPi[A]θPi-θAL+γUηUPUAθU-θAL" />
+src="https://latex.codecogs.com/svg.latex?\Large&space;dθALdt= i=1nγiηiPi[A]θPi-γa+i=1nγiηiPi[A] + [ηUPU]AθAL " />
+ 
 $$dθPidt=γiθAL-θPi #S3$$
 $$dθPidt=γiθAL-γiθPi #S4$$
 
