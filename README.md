@@ -53,17 +53,8 @@ where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\ma
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\&space;&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}&plus;\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\&space;&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}&plus;\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" title="\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)\ +\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}+\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)" /></a>
 
-<img src="https://render.githubusercontent.com/render/math?math=\frac{{d\theta}_{A_L}}{dt}=\gamma_a\left(\theta_{F_L}-\theta_{A_L}\right)&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\left(\theta_{P_i}-\theta_{A_L}\right)}+\gamma_U\frac{\left[\eta_UP_U\right]}{\left[A\right]}\left(\theta_U-\theta_{A_L}\right)">
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}&plus;\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}&plus;\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" title="\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a+\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}+\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" /></a>
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{{d\theta}_{A_L}}{dt}=\ i=1nγiηiPi[A]θPi-γa+i=1nγiηiPi[A] + [ηUPU]AθAL " />
-
-Let $\text{S}_1(N) = \sum_{p=1}^N \text{E}(p)$
-
-with the _ denoting italics, as
-
-"Let $\text{S}1(N) = \sum{p=1}^N \text{E}(p)$"
-
-The same thing happens with *.
 
 $$dθPidt=γiθAL-θPi #S3$$
 $$dθPidt=γiθAL-γiθPi #S4$$
