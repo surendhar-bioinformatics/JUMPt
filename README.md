@@ -47,20 +47,8 @@ Installation of the script is not required. Download all the scripts to any work
 # Detailed method of protein turnover calculation:
 
 In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys (Eq. 11) and individual proteins (Eq. 9) arranged into matrix form  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{d}{dt}\mathbf{\theta}\left(t\right)=\mathbf{G\theta}(t)" title="S1" />
-where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\mathbf{G}" /> is unknown with degradation parameters ( &gamma_a ,\ \ \gamma_i and \gamma_U$$) to be determined. We rearrange the equation (11) and (9) as follows:
+where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\mathbf{G}" /> is unknown with degradation parameters ( <img src="https://latex.codecogs.com/svg.latex?\Large&space;\gamma_a ,\ \ \gamma_i and \gamma_U" /> ) to be determined. We rearrange the equation (11) and (9) as follows:
 
-$e^{i \pi} = -1$
-https://render.githubusercontent.com/render/math?math=e%5E%7Bi%20%5Cpi%7D%20%3D%20-1&mode=inline
-
-Inspecting the URL, it is possible to notice that:
-
-The &mode=inline part is not required, the URL still returns the same image without it:
-
-https://render.githubusercontent.com/render/math?math=e%5E%7Bi%20%5Cpi%7D%20%3D%20-1.
-
-Modern browsers encode URLs automatically, thus this link would work as well:
-
-https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1.
 
 <img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
 
