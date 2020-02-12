@@ -55,9 +55,20 @@ where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\ma
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}&plus;\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a&plus;\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}&plus;\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" title="\frac{{d\theta}_{A_L}}{dt}=\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}\theta_{P_i}}-\left(\gamma_a+\sum_{i=1}^{n}{\gamma_i\frac{\left[\eta_iP_i\right]}{\left[A\right]}}+\frac{\left[\eta_iP_i\right]}{\left[A\right]}\right)\theta_{A_L}" /></a>
 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{P_i}}{dt}=\gamma_i\left(\theta_{A_L}-\theta_{P_i}\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{P_i}}{dt}=\gamma_i\left(\theta_{A_L}-\theta_{P_i}\right)" title="\frac{{d\theta}_{P_i}}{dt}=\gamma_i\left(\theta_{A_L}-\theta_{P_i}\right)" /></a>
 
-$$dθPidt=γiθAL-θPi #S3$$
-$$dθPidt=γiθAL-γiθPi #S4$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=\frac{{d\theta}_{P_i}}{dt}=\gamma_{i\theta_{A_L}}-\gamma_{i\theta_{P_i}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\frac{{d\theta}_{P_i}}{dt}=\gamma_{i\theta_{A_L}}-\gamma_{i\theta_{P_i}}" title="\frac{{d\theta}_{P_i}}{dt}=\gamma_{i\theta_{A_L}}-\gamma_{i\theta_{P_i}}" /></a>
+
+We construct our optimization problem with 
+- the function <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\theta}:\mathbb{R}\mapsto\mathbb{R}^{n&plus;3}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\theta}:\mathbb{R}\mapsto\mathbb{R}^{n&plus;3}" title="\mathbf{\theta}:\mathbb{R}\mapsto\mathbb{R}^{n+3}" /></a> which is built out of the n functions <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{P_{iL}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{P_{iL}}" title="\theta_{P_{iL}}" /></a> along with <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{A_L}&space;and&space;\theta_F" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{A_L}&space;and&space;\theta_F" title="\theta_{A_L} and \theta_F" /></a>.  Without loss of generality, we set <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\theta}_i=&space;\theta_{P_{iL}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\theta}_i=&space;\theta_{P_{iL}}" title="\mathbf{\theta}_i= \theta_{P_{iL}}" /></a> for <img src="https://latex.codecogs.com/gif.latex?1\le&space;i\le&space;n" title="1\le i\le n" /> and <img src="https://latex.codecogs.com/gif.latex?\mathbf{\theta}_{n&plus;1}=&space;\theta_{A_L}" title="\mathbf{\theta}_{n+1}= \theta_{A_L}" /> and <img src="https://latex.codecogs.com/gif.latex?\mathbf{\theta}_{n&plus;2}=&space;\theta_F,&space;\mathbf{\theta}_{n&plus;3}=&space;1" title="\mathbf{\theta}_{n+2}= \theta_F, \mathbf{\theta}_{n+3}= 1" />.  
+The n+3th entry is meant to represent the lumped unidentified proteome (U). 
+- The vector \mathbf{\gamma}\in\mathbb{R}^{n+2}, defined similarly to \mathbf{\theta}: \mathbf{\gamma}_i= \gamma_i for 1\le i\le n and \mathbf{\gamma}_{n+\mathbf{1}}=\gamma_a and \mathbf{\gamma}_{n+\mathbf{2}}=\gamma_U. 
+	The mapping G\∶\mathbb{R}^{n+2}\mapsto\ \mathbb{R}^{n+3\ \times\ n+3} which constructs a matrix from a vector \mathbf{\gamma} as, 
+
+
+
+
+
 
 # Major steps in the program (Demo data set)
 
