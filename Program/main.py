@@ -113,8 +113,8 @@ G   = np.array((M.T*M).todense())
 MTb = np.array(M.T*b).reshape((-1,))
 T   = ss.dia_matrix( (np.hstack((np.zeros(A.shape[1]),np.exp(.0125*t) -1)),0), G.shape  )
 gammaUt = np.array(np.dot(nl.pinv(G + T*1e-6), MTb)).reshape((-1,))
-res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2*(x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )
-res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 +  + nl.norm(x*(x < 0),2)**2, res.x, jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2* + (x*(x < 0)), method='l-bfgs-b', options={'maxiter':126,'iprint':3}, bounds=[(0,None)]*A.shape[1] + [(None,None)]*(G.shape[1] - A.shape[1]))
+res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: (np.dot(G,x) - MTb.T) + (x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )	
+res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2, res.x, jac=lambda x: (np.dot(G,x) - MTb.T), method='trust-constr', options={'maxiter':126,'verbose':3}, bounds=[(0,None)]*G.shape[0] )
 gammaUt = res.x.reshape((-1,1))
 gammaUt_temp = res.x.reshape((-1,1))
 ut      = np.array(gammaUt[A.shape[1]:]).reshape((-1,1))
@@ -122,7 +122,7 @@ ut[0] = 0
 
 def noFun( gamma ):
     fP = gu.generateSys( t, df[:,0], gamma )
-    return np.sin(np.arccos((np.dot(gamma*(f[:,0] - fP),ut)/(nl.norm(gamma*(f[:,0] - fP))*nl.norm(ut)))))
+    return np.sin(np.arccos((np.dot(gamma*(-f[:,0] + fP),ut)/(nl.norm(gamma*(f[:,0] - fP))*nl.norm(ut)))))
 
 res_UIP = so.minimize_scalar( noFun, bounds=[0,20], 
                           method='bounded', options={'disp':3,'maxiter':2000} )
@@ -148,15 +148,15 @@ ResError_temp = .001
 
 while ResError_temp <= ResError:
     print('\n Working to minize the residual error ; Thanks for your patience ...... \n')
-    res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2*(x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )
-    res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 +  + nl.norm(x*(x < 0),2)**2, res.x, jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2* + (x*(x < 0)), method='l-bfgs-b', options={'maxiter':126,'iprint':3}, bounds=[(0,None)]*A.shape[1] + [(None,None)]*(G.shape[1] - A.shape[1]))
+    res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: (np.dot(G,x) - MTb.T) + (x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )	
+    res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2, res.x, jac=lambda x: (np.dot(G,x) - MTb.T), method='trust-constr', options={'maxiter':126,'verbose':3}, bounds=[(0,None)]*G.shape[0] )
     gammaUt_temp = res.x.reshape((-1,1))
     ut      = np.array(gammaUt_temp[A.shape[1]:]).reshape((-1,1))
     ut[0] = 0
     
     def noFun( gamma ):
         fP = gu.generateSys( t, df[:,0], gamma )
-        return np.sin(np.arccos((np.dot(gamma*(f[:,0] - fP),ut)/(nl.norm(gamma*(f[:,0] - fP))*nl.norm(ut)))))
+        return np.sin(np.arccos((np.dot(gamma*(-f[:,0] + fP),ut)/(nl.norm(gamma*(f[:,0] - fP))*nl.norm(ut)))))
     
     res_UIP = so.minimize_scalar( noFun, bounds=[0,20], 
                               method='bounded', options={'maxiter':2000} )
