@@ -1,8 +1,6 @@
-import numpy as np, scipy.optimize as so, scipy.integrate as si, pandas as pd, de, numpy.linalg as nl, coupledOde as co, scipy.sparse as ss, generateUnobs as gu, matplotlib.pyplot as plt, time, subprocess, os
-from datetime import datetime 
+import numpy as np, scipy.optimize as so, pandas as pd, de, numpy.linalg as nl, coupledOde as co, scipy.sparse as ss, generateUnobs as gu, matplotlib.pyplot as plt, subprocess
 from pathlib import Path
-import tkinter
-
+#from tkinter import *
 
 def runMatlab( scriptFile ):
     """
@@ -45,12 +43,7 @@ def justify(a, invalid_val=0, axis=1, side='left'):
 #================== 1.Load the original data ======================
 ################################################################### 
 # Ask the user to select a single file name.
-#Inputfile   = "test_data.xlsx" # Assign spreadsheet filename to `file`
 Inputfile = input('Enter your input data file  (if it doesnt exist in current folder, enter with complete path;  test data file name is "test_data.xlsx"):') 
-#root = tkinter.Tk()
-#my_filetypes = [('all files', '.xlsx'), ('Excel file', '.txt')] # Build a list of tuples for each file type the file dialog should display
-#Inputfile = tkinter.filedialog.askopenfilename(initialdir=os.getcwd(), title="Please select a file:", filetypes=my_filetypes)   
-#root.destroy()
 P_data      = pd.read_excel(Inputfile,sheet_name= 'data') # Load spreadsheet
 tspan       = (P_data.loc[0, ['data_1', 'data_2', 'data_3', 'data_4', 'data_5']]).values.astype(int); 
 A1_ratio    = (np.transpose((P_data.loc[1, ['data_1', 'data_2', 'data_3', 'data_4', 'data_5']]).values.astype(float))).reshape((-1,1)); 
@@ -89,14 +82,14 @@ plt.savefig('Results/Original_data.jpeg', dpi=300, facecolor='w', edgecolor='w',
 #==================== Individual protein optimization =============
 ################################################################### 
 print('\n\n Calling MATLAB program to fit the indivual proteins and calculating its derivatives')
-runMatlab( 'PT_indi_Fitting' )
+#runMatlab( 'PT_indi_Fitting' )
 print('\n\n Completed indiviual protein fitting and results were saved')
-
+print('\n\n Started Global optimization using derivatives of Lys and all proteins')
 ################################################################### 
 ###====== Parmeter optimization using Derivative fitting ======##
 ################################################################### 
 
-Inputfile       = "Results/Indi_fit_res.xlsx" # Assign spreadsheet filename to `file`
+Inputfile       = "Results/Indi_fit_res.xlsx" 
 prot_SimuTraj   = pd.read_excel(Inputfile,sheet_name= 'f_Lys_P') 
 deri_prot       = pd.read_excel(Inputfile,sheet_name= 'df_Lys_P') 
 f               = (prot_SimuTraj.iloc[1:,:]).values
@@ -105,21 +98,23 @@ t               = tspan_medium[1:]
 
 ThetaH = np.hstack([f[:,0].reshape((-1,1)) - f[:,i].reshape((-1,1)) 
                     for i in range(1,f.shape[1])])
+# =============================================================================
+mask = (ThetaH > 0).nonzero()
+ThetaH[mask] = 0
+df[:,1:][mask] = 0
+# =============================================================================
 ThetaA = .05-f[:,0]
-
-A,b = de.lstSqMultiPt( ThetaH[:,:], ThetaA.reshape((-1,1)), df[:,1:], (df[:,0]-.05).reshape((-1,1)), EtaP/206, t, .0125 )[:2]
+ThetaH[ThetaH > 0] = 0
+A,b = de.lstSqMultiPt( ThetaH[:,:], ThetaA.reshape((-1,1)), df[:,1:], (df[:,0]-.05).reshape((-1,1)), EtaP/206, t, .0 )[:2]
 B   = de.lppBoltOn(ThetaH.shape[0],A.shape[1],t,0)
 M   = ss.hstack((A,B)).tocsr()
-# preconditioning with Jacobi preconditioner
-D   = ss.dia_matrix( (1./np.power(M.multiply(M).sum(0),.5),0), (M.shape[1],M.shape[1]) )
 G   = np.array((M.T*M).todense())
 # Tikhonov matrix for regularization
 MTb = np.array(M.T*b).reshape((-1,))
-nidx= np.nonzero(np.dot(nl.inv(G),MTb) < 0)[0]
 T   = ss.dia_matrix( (np.hstack((np.zeros(A.shape[1]),np.exp(.0125*t) -1)),0), G.shape  )
-gammaUt = np.array(np.dot(nl.inv(G + T*1e-6), MTb)).reshape((-1,))
-res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: (np.dot(G,x) - MTb.T) + (x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )
-res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2, res.x, jac=lambda x: (np.dot(G,x) - MTb.T), method='trust-constr', options={'maxiter':126,'verbose':3}, bounds=[(0,None)]*G.shape[0] )
+gammaUt = np.array(np.dot(nl.pinv(G + T*1e-6), MTb)).reshape((-1,))
+res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2*(x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )
+res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 +  + nl.norm(x*(x < 0),2)**2, res.x, jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2* + (x*(x < 0)), method='l-bfgs-b', options={'maxiter':126,'iprint':3}, bounds=[(0,None)]*A.shape[1] + [(None,None)]*(G.shape[1] - A.shape[1]))
 gammaUt = res.x.reshape((-1,1))
 gammaUt_temp = res.x.reshape((-1,1))
 ut      = np.array(gammaUt[A.shape[1]:]).reshape((-1,1))
@@ -143,18 +138,18 @@ integrator = co.coupledOde( len(EtaP_forDeriFit), EtaP_forDeriFit, A1,
 
 
 refft   = np.hstack((A1_ratio, P_ratio[:,:])); 
-refft   = np.vstack([x.reshape((1,-1)) for x in refft])
 rv      = integrator.integrate(tspan)
 idx     = list(range(len(EtaP_forDeriFit)-1)) + [-1]                 
 residual= rv[idx,:] - refft[:,list(range(1,len(EtaP_forDeriFit)))+[0]].T
 mask    = (1 - np.isnan(residual)).nonzero()
 flatResidual = residual[mask]; ResError = nl.norm(flatResidual)**2;
+print('\n Cuurent Residual Error = ', ResError)
 ResError_temp = .001
 
 while ResError_temp <= ResError:
     print('\n Working to minize the residual error ; Thanks for your patience ...... \n')
-    res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt_temp)).reshape((-1,)), jac=lambda x: (np.dot(G,x) - MTb.T) + (x*(x < 0)), method='tnc', options={'maxiter':126} )
-    res     = so.minimize( lambda x: nl.norm(np.dot(G,x) - MTb.T,2)**2, res.x, jac=lambda x: (np.dot(G,x) - MTb.T), method='trust-constr', options={'maxiter':126}, bounds=[(0,None)]*G.shape[0] )
+    res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 + nl.norm(x*(x < 0),2)**2, np.array(np.abs(gammaUt)).reshape((-1,)), jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2*(x*(x < 0)), method='tnc', options={'maxiter':126,'disp':3} )
+    res     = so.minimize( lambda x: nl.norm(M*x - b.T,2)**2 +  + nl.norm(x*(x < 0),2)**2, res.x, jac=lambda x: 2*(np.dot(G,x) - MTb.T) + 2* + (x*(x < 0)), method='l-bfgs-b', options={'maxiter':126,'iprint':3}, bounds=[(0,None)]*A.shape[1] + [(None,None)]*(G.shape[1] - A.shape[1]))
     gammaUt_temp = res.x.reshape((-1,1))
     ut      = np.array(gammaUt_temp[A.shape[1]:]).reshape((-1,1))
     ut[0] = 0
@@ -188,12 +183,9 @@ while ResError_temp <= ResError:
         gamma_UIP   = gamma_UIP_temp
         gamma       = gamma_temp
         EtaP_forDeriFit = EtaP_forDeriFit_temp
-        
-
-
+   
 integrator = co.coupledOde( len(EtaP_forDeriFit), EtaP_forDeriFit, A1,
                             np.ones(len(EtaP_forDeriFit)), np.ones(1), np.ones(1)*.05, gamma )
-
 rv      = integrator.integrate(tspan)
 idx     = list(range(len(EtaP_forDeriFit)-1))+[-1]                  
 residual= rv[idx,:] - refft[:,list(range(1,len(EtaP_forDeriFit)))+[0]].T
@@ -237,7 +229,7 @@ plt.plot(tspan_medium,A1_P_ratio_simu[:,1], 'b-',linewidth=2, markeredgecolor='b
 plt.plot(tspan_medium,A1_P_ratio_simu[:,2:-1], 'b-',linewidth=2, markeredgecolor='b',markeredgewidth=1, markersize=6)
 plt.plot(tspan_medium,A1_P_ratio_simu[:,len_P_data+1], 'c-',linewidth=2, markeredgecolor='c',markeredgewidth=1, markersize=6,label='UIP')
 plt.plot(tspan, A1_ratio,     'rs',linewidth=2, markeredgecolor='r',markeredgewidth=2, markersize=8,label='Free Lys(data)')
-plt.plot(justify(tspan_data[:,1], invalid_val=-1, axis=0, side='left'),justify(P_ratio[:,1],invalid_val=np.nan, axis=0, side='left'), 'bo',linewidth=2, markeredgecolor='b',markeredgewidth=1, markersize=8,label='Protein(data)')
+plt.plot(justify(tspan_data[:,1], invalid_val=-1, axis=0, side='left'),justify(P_ratio[:,1],invalid_val=np.nan, axis=0, side='left'), 'bo',linewidth=2, markeredgecolor='b',markeredgewidth=1, markersize=7,label='Protein(data)')
 plt.plot(justify(tspan_data, invalid_val=-1, axis=0, side='left'),justify(P_ratio,invalid_val=np.nan, axis=0, side='left'), 'bo',linewidth=2, markeredgecolor='b',markeredgewidth=1, markersize=5)
 plt.plot(tspan_medium,A1_P_ratio_simu[:,0], 'r-',linewidth=2, markeredgecolor='r',markeredgewidth=1, markersize=6)
 plt.title('Original data and simulations',FontSize = 16)
