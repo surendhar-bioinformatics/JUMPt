@@ -4,6 +4,7 @@
 - Software Requirements
 - Hardware Requirements
 - Installation
+- Details of protein turnover calculation method
 - Major steps in the program (Demo data set) 
 - Maintainers
 - Acknowledgements
@@ -44,7 +45,7 @@ The current program has been successfully tested on the following system: 16 GB 
 # Installation
 Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associated with the program) should be placed in the same folder. Once the scripts are saved, open and run "main.py" in python console.
 
-# Detailed method of protein turnover calculation:
+# Details of protein turnover calculation method
 
 In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys and individual proteins (equation(9) and (11)) arranged into matrix form  <img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{d}{dt}\mathbf{\theta}\left(t\right)=\mathbf{G\theta}(t)" title="S1" />
 where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\mathbf{G}" /> is unknown with degradation parameters ( <img src="https://render.githubusercontent.com/render/math?math=\gamma_a , \gamma_i \, and \, \gamma_U"> ) to be determined. We rearrange the equation (9) and (11) as follows:
@@ -121,8 +122,9 @@ and goto 6, using <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\g
 
 11. return <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\gamma}_0" /></a>
 
-There are some helpful clarifying remarks to be made about Algorithm 1:
-- We use a grid spacing of <10></-1> 10-1 for the <a href="https://www.codecogs.com/eqnedit.php?latex=\widehat{t_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\widehat{t_i}" /></a>  in line 2.
+**There are some helpful clarifying remarks to be made about Algorithm  we described above**
+
+- We use a grid spacing of 10<sup>-1</sup> for the <a href="https://www.codecogs.com/eqnedit.php?latex=\widehat{t_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\widehat{t_i}" /></a>  in line 2.
 - The matrix <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{M}\left(t\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{M}\left(t\right)" /></a> on line 4 is a rearrangement of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{G\theta}\left(t\right)=\frac{d}{dt}\mathbf{\theta}\left(t\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{G\theta}\left(t\right)=\frac{d}{dt}\mathbf{\theta}\left(t\right)" /></a>, so it satisfies
 <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{M}\left(t\right)\mathbf{\gamma}=\frac{d}{dt}\mathbf{\theta}\left(t\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{M}\left(t\right)\mathbf{\gamma}=\frac{d}{dt}\mathbf{\theta}\left(t\right)" /></a>
 
