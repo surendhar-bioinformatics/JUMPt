@@ -108,11 +108,10 @@ where <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0,u" t
 7. Let <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\delta}_{n&plus;3\&space;}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\delta}_{n&plus;3\&space;}" /></a> be the Kronecker delta vector which is zero everywhere except at entry n+3
 
 8. Set the n+3th entry of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\gamma}_0" /></a> to zero.  Let <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbit{S}:=&space;\psi\left(t\right)=e^{\widehat{t_i}\mathbf{G}\left(\mathbf{\gamma}_0&plus;\mathbf{\delta}_{n&plus;3\&space;}g\right)}&space;\mathbf{\theta}\left(0\right):g\geq0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbit{S}:=&space;\psi\left(t\right)=e^{\widehat{t_i}\mathbf{G}\left(\mathbf{\gamma}_0&plus;\mathbf{\delta}_{n&plus;3\&space;}g\right)}&space;\mathbf{\theta}\left(0\right):g\geq0" /></a>
-be the set of protein dynamics obtained by perturbing 
-	<a href="https://www.codecogs.com/eqnedit.php?latex=\gamma_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma_{U}" /></a> and find the <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}" /></a> that maximizes correlation with <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{u}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{u}" /></a>
+be the set of protein dynamics obtained by perturbing <a href="https://www.codecogs.com/eqnedit.php?latex=\gamma_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma_{U}" /></a> and find the <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}" /></a> that maximizes correlation with <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{u}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{u}" /></a>
 
 
-[equation](http://www.sciweavers.org/tex2img.php?eq=1%2Bsin%28mc%5E2%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![equation](http://www.sciweavers.org/tex2img.php?eq=1%2Bsin%28mc%5E2%29&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
 
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}:=&space;{\rm&space;argmax}\below{\psi\in\mathbit{S}}{\cos{\angle(}\mathbf{u},\&space;\psi)}=" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}:=&space;{\rm&space;argmax}\below{\psi\in\mathbit{S}}{\cos{\angle(}\mathbf{u},\&space;\psi)}=" /></a>
