@@ -109,7 +109,19 @@ where <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0,u" t
 8. Set the n+3th entry of <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\gamma}_0" /></a> to zero.  Let <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbit{S}:=&space;\psi\left(t\right)=e^{\widehat{t_i}\mathbf{G}\left(\mathbf{\gamma}_0&plus;\mathbf{\delta}_{n&plus;3\&space;}g\right)}&space;\mathbf{\theta}\left(0\right):g\geq0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbit{S}:=&space;\psi\left(t\right)=e^{\widehat{t_i}\mathbf{G}\left(\mathbf{\gamma}_0&plus;\mathbf{\delta}_{n&plus;3\&space;}g\right)}&space;\mathbf{\theta}\left(0\right):g\geq0" /></a>
 be the set of protein dynamics obtained by perturbing <a href="https://www.codecogs.com/eqnedit.php?latex=\gamma_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma_{U}" /></a> and find the <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}" /></a> that maximizes correlation with <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{u}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{u}" /></a>
 
-	
+<a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}:=&space;{\rm&space;argmax}\below{\psi\in\mathbit{S}}{\cos{\angle(}\mathbf{u},\&space;\psi)}=" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}:=&space;{\rm&space;argmax}\below{\psi\in\mathbit{S}}{\cos{\angle(}\mathbf{u},\&space;\psi)}=" /></a>
+
+
+9. set<a href="https://www.codecogs.com/eqnedit.php?latex={\&space;\mathbf{\gamma}}_0&space;:=&space;\mathbf{\gamma}_0&plus;&space;\mathbf{\delta}_{n&plus;3\&space;}\gamma_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?{\&space;\mathbf{\gamma}}_0&space;:=&space;\mathbf{\gamma}_0&plus;&space;\mathbf{\delta}_{n&plus;3\&space;}\gamma_{U}" /></a>  where <a href="https://www.codecogs.com/eqnedit.php?latex=\gamma_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\gamma_{U}" /></a> is the perturbation that produced <a href="https://www.codecogs.com/eqnedit.php?latex=\theta_{U}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\theta_{U}" /></a>  and set 
+<a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon_j&space;:=&space;\left&space;\|&space;\mathbf{\theta}\left(t_i\right)-e^{t_i\mathbf{G}\left(\mathbf{\gamma}_0\right)}\mathbf{\theta}\left(0\right)&space;\right&space;\|_{\mathbf{W}}^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon_j&space;:=&space;\left&space;\|&space;\mathbf{\theta}\left(t_i\right)-e^{t_i\mathbf{G}\left(\mathbf{\gamma}_0\right)}\mathbf{\theta}\left(0\right)&space;\right&space;\|_{\mathbf{W}}^{2}"  /></a>
+
+
+10. if j=1 or <a href="https://www.codecogs.com/eqnedit.php?latex=\epsilon_j<\epsilon_{j-1\&space;}," target="_blank"><img src="https://latex.codecogs.com/gif.latex?\epsilon_j<\epsilon_{j-1\&space;}," /></a> set <a href="https://www.codecogs.com/eqnedit.php?latex=j\&space;:=j&plus;1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?j\&space;:=j&plus;1" /></a>
+and goto 6, using <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\gamma}_0" /></a> as an initial guess for the iterative solver used on line 6.
+
+11. return <a href="https://www.codecogs.com/eqnedit.php?latex=\mathbf{\gamma}_0" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\mathbf{\gamma}_0" /></a>
+
+
 # Major steps in the program (Demo data set)
 
 A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Start the "main.py" script in Python console. and follow the instruction. Input your data file (preferably in .xlsx) along with full path. During the execution of program, expected output is saved in "Results" folder which is created in the working directory. Run time for demo on a desktop computer is about 2-10 min depending on the system configuration.
