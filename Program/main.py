@@ -82,7 +82,7 @@ plt.savefig('Results/Original_data.jpeg', dpi=300, facecolor='w', edgecolor='w',
 #==================== Individual protein optimization =============
 ################################################################### 
 print('\n\n Calling MATLAB program to fit the indivual proteins and calculating its derivatives')
-#runMatlab( 'PT_indi_Fitting' )
+runMatlab( 'PT_indi_Fitting' )
 print('\n\n Completed indiviual protein fitting and results were saved')
 print('\n\n Started Global optimization using derivatives of Lys and all proteins')
 ################################################################### 
