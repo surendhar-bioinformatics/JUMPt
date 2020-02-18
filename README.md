@@ -45,7 +45,8 @@ The current program has been successfully tested on the following system: 16 GB 
 # Installation
 Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associated with the program) should be placed in the same folder. Once the scripts are saved, open and run "main.py" in python console.
 
-# Details of protein turnover calculation method
+# Details of protein turnover calculation method 
+(Please also see the attached "Deatails of Algorithm_v1.0.0.pdf" for more details)
 
 In order to determine protein degradation rates, we fit the experimental data of all the proteins and Lys using the matrix exponential function. The ODE for Lys and individual proteins (equation(11) and (9)) can be rewritten in matrix form  <a href="https://www.codecogs.com/eqnedit.php?latex=\inline&space;\frac{d}{dt}\mathbf{\theta}(t)&space;=&space;\mathbf{G}\&space;\mathbf{\theta}\left(t\right)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\inline&space;\frac{d}{dt}\mathbf{\theta}(t)&space;=&space;\mathbf{G}\&space;\mathbf{\theta}\left(t\right)" /></a>
 where the matrix <img src="https://latex.codecogs.com/svg.latex?\Large&space;\mathbf{G}" /> has degradation parameters ( <img src="https://render.githubusercontent.com/render/math?math=\gamma_a , \gamma_i \, and \, \gamma_U"> ) to be determined. We rearrange the equation (9) and (11) in two different forms as follows:
