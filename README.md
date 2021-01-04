@@ -34,7 +34,7 @@ The current program has been successfully tested on the following system: 16 GB 
 # Input File Preparation
 A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Similar to the testing dataset, user need to prepare the input data file with the below information.
 1.	SILAC ratio for proteins and free Lys
-2.	Free Lys 
+2.	Free Lys concentration
 3.	Lys concentration in in individual proteins.
 
 # Run JUMPt program (Demo data set)
