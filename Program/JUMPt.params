@@ -1,0 +1,5 @@
+out_file = "Half-lives.xlsx"; %Output file name
+
+input_file  = "test_data.xlsx"; %Input file name
+
+sum_Conc    = 41300; %Total concentration of Lys in a tissue/cell (units: micoM)

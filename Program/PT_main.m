@@ -3,25 +3,26 @@
 close all
 clearvars 
 
-%% read the original data
-input_file  = 'test_data.xlsx';
-out_file = 'Half-lives.xlsx';
-sum_Conc    = 41300; %micoM
-d.t_long = linspace(0, 32,321);
+%% 
+%read parameter file
+fid = fopen('JUMPt.params');
+param = textscan(fid,'%s','delimiter','\n');
+cellfun(@eval,param{1});
+fclose(fid);
 
+% read the data
 All_data   = readtable(input_file);
 data.t     = table2array(All_data(1,{'data_1' 'data_2' 'data_3' 'data_4' 'data_5'}));  
-data.Lys   = table2array(All_data(2,{'data_1' 'data_2' 'data_3' 'data_4' 'data_5'}));% pulse times 
-data.Conc  = table2array(All_data(2:end,{'Concentration_microM'}))';% pulse times 
+data.Lys   = table2array(All_data(2,{'data_1' 'data_2' 'data_3' 'data_4' 'data_5'}));% Lys data
+data.Conc  = table2array(All_data(2:end,{'Concentration_microM'}))';% concentration 
 data.t_long = linspace(0, 32,321);
-data.protInfo  = table2array(All_data(3:end,{'Name'}));                       % protein IDs
+data.protInfo  = table2array(All_data(3:end,{'Name'})); % protein IDs
 
-SILAC_data      = table2cell(All_data(3:end,{'data_1' 'data_2' 'data_3' 'data_4' 'data_5'}));          % data range
-SILAC_data_NaN  = cellfun(@(x) ~isa(x,'double'),SILAC_data);     % check for possible 0x0 char reads
-SILAC_data(SILAC_data_NaN)               = {NaN};                                % set those to NaNs
-data.SILAC_data                 = cell2mat(SILAC_data)';                          % heavy/light ratios,
-
-
+SILAC_data      = table2cell(All_data(3:end,{'data_1' 'data_2' 'data_3' 'data_4' 'data_5'}));% data range
+SILAC_data_NaN  = cellfun(@(x) ~isa(x,'double'),SILAC_data); % check for possible 0x0 char reads
+SILAC_data(SILAC_data_NaN)   = {NaN};% set those to NaN
+data.SILAC_data              = cell2mat(SILAC_data)'; % heavy/light ratios,
+%% Optimization to find the parameters
 
 Num_prot_for_optim = 100;
 se = [0];
@@ -55,16 +56,14 @@ for i = 1:length(se)-1
     res_error       = (nansum((data.SILAC_data_temp - Lys_P(:,1:end-1)).^2));
     Glob_fit_Prot(se(i)+1:se(i+1),:) = [Opts(2:end-1)',Ci(2:end-1,:),res_error(2:end)'];
 end
-
 fprintf('\n *****  Completed Optimization of paramters; Now exporting half-live to excel file **** \n')
 
-% Store the parameters
+%% Store the parameters
 N  = size(All_data,1)-1;
 data_table = cell([N 5]);
 data_table(1, 1:5) = {'Protein_Description', 'HalfLife(days)', 'HalfLife_CI_1', 'HalfLife_CI_2', 'residual_error'};
 data_table(2:end,1) = data.protInfo;
     
-%Tc(1,1+(1:N)) = data.cnd(data.cndI)
 data_table(2:end,2:end) = num2cell(Glob_fit_Prot); %num2cell(data.t)
 data_table = cell2table(data_table);
 writetable(data_table,out_file,'WriteVariableNames',false);% 'Sheet','half-lives'
