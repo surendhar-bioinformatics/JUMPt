@@ -32,20 +32,17 @@ The program can be run on either Linux or windows. Memory size of 4GB is an opti
 The current program has been successfully tested on the following system: 16 GB memory 3.3 GHz CPU processors with 6 cores.
 
 # Input File Preparation
-Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associated with the program) should be placed in the same folder. Once the scripts are saved, open and run "PT_main.m" in MATLAB.
-JUMPt program requires input data file (preferably in .xlsx) with following information.
+A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Similar to the testing dataset, user need to prepare the input data file with the below information.
 1.	SILAC ratio for proteins and free Lys
-2.	Free Lys and total Lys concentrations
-3.	Lys concentration in in individual proteins which is calculated based on the proteins concentration multiplied by number of Lys molecule in it.
+2.	Free Lys 
+3.	Lys concentration in in individual proteins.
 
 # Run JUMPt program (Demo data set)
-A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Start the " PT_main.m " script in MATLAB. and follow the instruction. The work flow of the JUMPt software is describe din Figure 1. 
+Installation of the script is not required. Download all the scripts to any working directory (e.g. /home/usr/JUMPt). IMPORTANT: All the scripts including associated modules (associated with the program) should be placed in the same folder. 
+User required to specify the input and output file names (along with the exact path) and total Lys concentration in the 'JUMPt.params' file. Once the parameter file is ready open and run "PT_main.m" in MATLAB.
 
-Non-linear fitting of proteins and Lys data using ODE is computationally expensive especially when the protein data is huge (e.g. > 1000).  To reduce the complexity of we do devide the data into sets of 100 proteins. For each set the program performs multistep optimization to find the optimal degradation rates (turnover rates or Half-lives). 
-The final output with protein degradation rates and half-lives were saved in the same working directory. One can use these results to understand the turnover rate of protein of interest.
-
-Global optimization of protein and degradation rate:
-
+Non-linear fitting of proteins and Lys data using ODE is computationally expensive especially when the protein data is huge (e.g. > 1000 proteins).  To reduce the computational complexity, we do devide the data into sets of 100 proteins. For each set the program performs multistep optimization to find the optimal degradation rates (turnover rates or Half-lives). 
+The final output with protein half-lives along with their confidence intervals were saved in the output file mentioned in the params file. One can use these results to understand the turnover rate of protein of interest.
 
 # Maintainers
 To submit bug reports and feature suggestions, please contact:
