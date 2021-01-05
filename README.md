@@ -38,7 +38,9 @@ Installation of the script is not required. Download all the scripts to any work
 A testing dataset (test_data.xlsx) is available along with the scripts for evaluation purposes. Similar to the testing dataset, the user needs to prepare the input data file with the below information.
 1.	SILAC ratio for proteins and free Lys
 2.	Free Lys concentration
-3.	Lys concentration in individual proteins.
+3.	Lys concentration in individual proteins
+
+In the current version, the absolute concentration of each individual protein was calculated based on the commonly used APEX method based on theoretical peptide identification probability and MS/MS spectral counts in a deep brain proteome dataset covering more than 14,000 unique mouse proteins. Each protein-bound Lys concentration was then calculated according to the APEX output, Lys residue number in each protein, and the total measured protein-bound Lys concentration (i.e. 41300 microM). A list of 14000 brain proteins and their concentrations can be found in the file "Brain_proteinConcentrations.xlsx".  
 
 # Run JUMPt program (Demo data set)
 JUMPt requires a parameter file (JUMPt.parms). The user needed to specify the input and output file names (along with the exact path) and total Lys concentration in the parameter file. Once the parameter file is ready, run "PT_main.m" in MATLAB.
