@@ -1,7 +1,9 @@
 %Parameter file for JUMPt program v2.0.0
-Setting_1 = 1 ; %Select when user know the measured  SILAC ratios for Proteins alone
-Setting_2 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys
-Setting_3 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue
+
+%Choose the setting that will used to calculate the half-lives
+Setting_1 = 1 ; %Select when user know the measured  SILAC ratios for Proteins alone; YES = 1; NO = 2
+Setting_2 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys; YES = 1; NO = 2
+Setting_3 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue; YES = 1; NO = 2
  
 out_file = "Half-lives.xlsx"; %Output file is generated with a setting name at the end;(e.g. Half-lives_setting1.xlsx)
 
@@ -10,4 +12,4 @@ input_file  = "test_data.xlsx"; %Input file name
 
 Total_Lys_concentration_in_tissue    = 41300; %Total concentration of Lys in a tissue/cell (units: micoM); 0 if not measured
 
-Num_prot_in_each_fitting = 100;
+Num_prot_in_each_fitting = 100; % 50 - 100 proteins is an better range to computationally run the program
