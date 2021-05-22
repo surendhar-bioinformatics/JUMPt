@@ -14,7 +14,7 @@ JUMPt (JUMP-turnover) software determines the protein turnover rates in metaboli
 
 JUMPt is part of JUMP Software Suite (shortly JUMP), which is an integrative omics data processing and analysis tool, including protein/peptide database creation, database search, identification filtering, quantification, network analysis, proteogenomics and protein turnover analysis.
 
-# Release notes (Version 1.0.0)
+# Release notes (Version 2.0.1)
 In this version 
 1. We assume that the overall amount of proteins in mice is unchanged over time as the mice used in this study are adults. 
 2. The Lys used in protein synthesis originate from the food intake, with the rest recycled through protein degradation. 
