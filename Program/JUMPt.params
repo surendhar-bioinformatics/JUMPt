@@ -2,8 +2,8 @@
 
 %Choose the setting that will used to calculate the half-lives
 Setting_1 = 1 ; %Select when user know the measured  SILAC ratios for Proteins alone; YES = 1; NO = 2
-Setting_2 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys; YES = 1; NO = 2
-Setting_3 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue; YES = 1; NO = 2
+Setting_2 = 0 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys; YES = 1; NO = 2
+Setting_3 = 0 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue; YES = 1; NO = 2
  
 out_file = "Half-lives.xlsx"; %Output file is generated with a setting name at the end;(e.g. Half-lives_setting1.xlsx)
 

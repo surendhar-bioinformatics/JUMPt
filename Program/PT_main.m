@@ -2,7 +2,7 @@
 
 close all
 clearvars 
-
+tic
 %% 
 %read parameter file
 fid = fopen('JUMPt.params');
@@ -45,7 +45,7 @@ parameters.Num_prot_to_fit = size(data.SILAC_data,2);
 
 %calling The  main function
 Prot_turnover(data,parameters)
-
+toc
 fprintf('\n *****  Completed exporting half-live to excel file ; Now the Program is complete *******\n\n')
 
 
