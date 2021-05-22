@@ -1,5 +1,13 @@
-out_file = "Half-lives.xlsx"; %Output file name
+%Parameter file for JUMPt program v2.0.0
+Setting_1 = 1 ; %Select when user know the measured  SILAC ratios for Proteins alone
+Setting_2 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys
+Setting_3 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue
+ 
+out_file = "Half-lives.xlsx"; %Output file is generated with a setting name at the end;(e.g. Half-lives_setting1.xlsx)
 
+%input_file  = "U:\Projects\Protein_turnover\SILAC_FAD\CommProt_withSILACdata_jumpt.xlsx"; %Input file name
 input_file  = "test_data.xlsx"; %Input file name
 
-sum_Conc    = 41300; %Total concentration of Lys in a tissue/cell (units: micoM)
+Total_Lys_concentration_in_tissue    = 41300; %Total concentration of Lys in a tissue/cell (units: micoM); 0 if not measured
+
+Num_prot_in_each_fitting = 100;
