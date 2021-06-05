@@ -9,4 +9,4 @@ input_file  = "test_data.xlsx"; %Input file name
 
 Total_Lys_concentration_in_tissue    = 397501; %Total concentration of Lys in a tissue/cell (units: micoM); 0 if not measured
 
-Num_prot_in_each_fitting = 100;
+Num_prot_in_each_fitting = 100; % number of protein to fit each time; 50 proteins are better if the total proteins > 100

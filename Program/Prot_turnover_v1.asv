@@ -96,9 +96,10 @@ elseif (mod(size_Protein_data2,parameters.prot_per_fit) > 0)  && (mod(size_Prote
     data.se2(end+1) = size_Protein_data2; 
 end
 %
-if length(data.se2) > 3
-    data.se2 = data.se2(1:3);
+if length(data.se2) > 5
+    data.se2 = data.se2(1:5);
 end 
+
 
 rng default % For reproducibility
 data.Ansatz_          = rand(11,size_Protein_data+2);
@@ -111,7 +112,7 @@ if parameters.setting3 == 1
     % Fitting/optimizing data with all time points to get the Lys degredation rate and ratio between avearage protein-bound Lys and free lys
     OptiResStep1 = gama_Lys(data,parameters,3);    %keyboard
     Glob_fit_Prot_setting3 = OptiResStep1.prot_deg_rate;
-    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 2)
+    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 1)
         Glob_fit_Prot_setting3 = gama_Prot(data,parameters,OptiResStep1, 3);
     end
     Glob_fit_Prot = [Glob_fit_Prot Glob_fit_Prot_setting3(:,1)];
@@ -121,7 +122,7 @@ if parameters.setting2 == 1
     % Fitting/optimizing data with all time points to get the Lys degredation rate and ratio between avearage protein-bound Lys and free lys
     OptiResStep1 = gama_Lys(data,parameters,2);
     Glob_fit_Prot_setting2 = OptiResStep1.prot_deg_rate;
-    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 2)
+    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 1)
         Glob_fit_Prot_setting2 = gama_Prot(data,parameters,OptiResStep1, 2);
     end
     Glob_fit_Prot = [Glob_fit_Prot Glob_fit_Prot_setting2(:,1)];
@@ -129,15 +130,24 @@ if parameters.setting2 == 1
 
 end
 if parameters.setting1 == 1
+    fprintf('Setting is not defined; please define the setting to calculate the half-lives\n')
     % Fitting/optimizing data with all time points to get the Lys degredation rate and ratio between avearage protein-bound Lys and free lys
-    OptiResStep1 = gama_Lys(data,parameters,1); 
+    OptiResStep1 = gama_Lys(data,parameters,1);
     Glob_fit_Prot_setting1 = OptiResStep1.prot_deg_rate;
-    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 2)
+    if (data.se2(end) ~= data.se(end)) || (length(data.se2) ~= 1)
         Glob_fit_Prot_setting1 = gama_Prot(data,parameters,OptiResStep1,1);
     end
     Glob_fit_Prot = [Glob_fit_Prot Glob_fit_Prot_setting1(:,1)];
     median_half_Lives_setting1 = median(Glob_fit_Prot_setting1(:,1))
 end
+
+figure(); hold on; set(gca,'LineWidth',2.5); set(gca,'FontSize',16); % box on; grid on;
+boxplot(Glob_fit_Prot)
+%boxplot(Glob_fit_Prot, 'Labels',{'Setting-3','Setting-2','Setting-1'})
+xlabel('different JUMPt settings ')
+ylabel('calculated half-lives')
+title('Distribution of calculated half-lives')
+hold off
 
 fprintf('\n *****  Completed exporting half-live to excel file ; Now the Program is complete *******\n\n')
 end
