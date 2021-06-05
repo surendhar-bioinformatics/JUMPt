@@ -118,11 +118,11 @@ if gama_Lys_best == 100
 end
 if (se2(end) == se(end)) || (length(se2) == 1)
     if Setting == 3
-        data.Conc_temp          = [data.LysConc, data.ProtConc2, parameters.tot_Lys-sum(data.ProtConc2)];
-        Lys_P_init              = ones(1,2+size(data.SILAC_data2,2));
-        [t,Lys_P_simu]          = ode15s(@(t,Lys_P)PT_ODE(t,Lys_P,Gfit_final,data.Conc_temp),data.t_long,Lys_P_init);
-        free_Lys_fitting        = [[0; t] [Error_free_Lys; Lys_P_simu(:,1)]];
-        [Opts,~,resid,~,~,~,J]  = lsqnonlin(@GO_lsqnonlin2,[log(2)./Gfit_final],lb,ub,opts2, data.t, data.SILAC_data_temp,  data.Conc_temp, Setting);
+        data.Conc_temp      = [data.LysConc, data.ProtConc2, parameters.tot_Lys-sum(data.ProtConc2)];
+        Lys_P_init          = ones(1,2+size(data.SILAC_data2,2));
+        [t,Lys_P_simu]      = ode15s(@(t,Lys_P)PT_ODE(t,Lys_P,Gfit_final,data.Conc_temp),data.t_long,Lys_P_init);
+        free_Lys_fitting    = [[0; t] [Error_free_Lys; Lys_P_simu(:,1)]];
+        [Opts,~,resid,~,~,~,J] = lsqnonlin(@GO_lsqnonlin2,[log(2)./Gfit_final],lb,ub,opts2, data.t, data.SILAC_data_temp,  data.Conc_temp, Setting);
         Ci = nlparci(Opts,resid,'jacobian',J,'alpha',.05);
         [t,Lys_P_simu]	= ode15s(@(t,Lys_P)PT_ODE(t,Lys_P,Gfit_final,data.Conc_temp),data.t,Lys_P_init);
         Prot_error          = (nansum((data.SILAC_data2(:,1:end) - Lys_P_simu(:,2:end-1)).^2));
@@ -134,26 +134,26 @@ if (se2(end) == se(end)) || (length(se2) == 1)
     elseif Setting == 2              
         data.Conc_temp      = [];
         Lys_P_init          = ones(1, 1+size(data.SILAC_data2,2));
-        [t,Lys_P_simu]      = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t_long,Lys_P_init);
-        free_Lys_fitting    = [[0; t] [Error_free_Lys; Lys_P_simu(:,1)]];
-        [t,Lys_P_simu]      = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t,Lys_P_init);
-        Prot_error          = (nansum((data.SILAC_data2(:,1:end) - Lys_P_simu(:,2:end)).^2));
+        [t,Lys_P_simu]	= ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t_long,Lys_P_init);
+        free_Lys_fitting  = [[0; t] [Error_free_Lys; Lys_P_simu(:,1)]];
+        [t,Lys_P_simu]    = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t,Lys_P_init);
+        Prot_error        = (nansum((data.SILAC_data2(:,1:end) - Lys_P_simu(:,2:end)).^2));
         [Opts,~,resid,~,~,~,J] = lsqnonlin(@GO_lsqnonlin2,[log(2)./Gfit_final(1:end-1) Gfit_final(end)],lb,ub,opts2, data.t, data.SILAC_data_temp,  data.Conc_temp, Setting);
         Ci = nlparci(Opts,resid,'jacobian',J,'alpha',.05);
-        Glob_fit_Prot   = [Opts(2:end-1)',(((Ci(2:end-1,2)-Ci(2:end-1,1))/2)/2),Prot_error'];
-        Gfit_tab        = array2table([data.SILAC_data',  Glob_fit_Prot],'VariableNames',{'day0','day4','day8','day16','day32', 'HalfLife_in_days', 'HalfLife_CI', 'residual_error' });
+        Glob_fit_Prot = [Opts(2:end-1)',(((Ci(2:end-1,2)-Ci(2:end-1,1))/2)/2),Prot_error'];
+        Gfit_tab    = array2table([data.SILAC_data',  Glob_fit_Prot],'VariableNames',{'day0','day4','day8','day16','day32', 'HalfLife_in_days', 'HalfLife_CI', 'residual_error' });
         writetable([data.protInfo,Gfit_tab],parameters.out_file, 'Sheet','Setting2');
     elseif Setting == 1
         data.Conc_temp	= [];
-        Lys_P_init              = ones(1, 1+size(data.SILAC_data2,2));
-        [t,Lys_P_simu]          = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t_long,Lys_P_init);
-        free_Lys_fitting        = [t Lys_P_simu(:,1)];
-        [Opts,~,resid,~,~,~,J]  = lsqnonlin(@GO_lsqnonlin2,[log(2)./Gfit_final(1:end-1) Gfit_final(end)],lb,ub,opts2, data.t, data.SILAC_data,  data.Conc_temp, Setting);
+        Lys_P_init      = ones(1, 1+size(data.SILAC_data2,2));
+        [t,Lys_P_simu]       = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t_long,Lys_P_init);
+        free_Lys_fitting  = [t Lys_P_simu(:,1)];
+        [Opts,~,resid,~,~,~,J] = lsqnonlin(@GO_lsqnonlin2,[log(2)./Gfit_final(1:end-1) Gfit_final(end)],lb,ub,opts2, data.t, data.SILAC_data,  data.Conc_temp, Setting);
          Ci = nlparci(Opts,resid,'jacobian',J,'alpha',.05);
-        [t,Lys_P_simu]	= ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t,Lys_P_init);
-        Prot_error  	= (nansum((data.SILAC_data2(:,1:end) - Lys_P_simu(:,2:end)).^2));
-        Glob_fit_Prot	= [Opts(2:end-1)',(((Ci(2:end-1,2)-Ci(2:end-1,1))/2)/2),Prot_error'];
-        Gfit_tab        = array2table([data.SILAC_data',  Glob_fit_Prot],'VariableNames',{'day0','day4','day8','day16','day32', 'HalfLife_in_days', 'HalfLife_CI', 'residual_error' });
+        [t,Lys_P_simu]    = ode15s(@(t,Lys_P)PT_ODE_Ratio(t,Lys_P,Gfit_final),data.t,Lys_P_init);
+        Prot_error        = (nansum((data.SILAC_data2(:,1:end) - Lys_P_simu(:,2:end)).^2));
+        Glob_fit_Prot= [Opts(2:end-1)',(((Ci(2:end-1,2)-Ci(2:end-1,1))/2)/2),Prot_error'];
+        Gfit_tab    = array2table([data.SILAC_data',  Glob_fit_Prot],'VariableNames',{'day0','day4','day8','day16','day32', 'HalfLife_in_days', 'HalfLife_CI', 'residual_error' });
         writetable([data.protInfo,Gfit_tab],parameters.out_file, 'Sheet','Setting1');
     end
 end

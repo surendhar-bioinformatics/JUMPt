@@ -96,8 +96,8 @@ elseif (mod(size_Protein_data2,parameters.prot_per_fit) > 0)  && (mod(size_Prote
     se2(end+1) = size_Protein_data2; 
 end
 
-if length(se2) > 5
-    se2 = se2(1:5);
+if length(se2) > 3
+    se2 = se2(1:3);
 end 
 
 rng default % For reproducibility
@@ -107,19 +107,19 @@ Ansatz_          = rand(11,size_Protein_data+2);
 %% Calculate the half-lives with different settings
 if parameters.setting3 == 1
     [gama_Lys_best,Concen_ratio, free_Lys_fitting] = gama_Lys(se2,se, data,parameters,Ansatz_,3);
-    if se(end) >  se2(end)
+    if (se2(end) ~= se(end)) || (length(se2) ~= 1)
         Glob_fit_Prot_setting3 = gama_Prot(se,data,parameters,Ansatz_, gama_Lys_best, Concen_ratio, free_Lys_fitting, 3);
     end
 end
 if parameters.setting2 == 1
     [gama_Lys_best,Concen_ratio, free_Lys_fitting] = gama_Lys(se2,se, data,parameters,Ansatz_,2);
-    if se(end) >  se2(end)
+    if (se2(end) ~= se(end)) || (length(se2) ~= 1)
         Glob_fit_Prot_setting2 = gama_Prot(se,data,parameters,Ansatz_, gama_Lys_best, Concen_ratio, free_Lys_fitting, 2);
     end
 end
 if parameters.setting1 == 1
     [gama_Lys_best,Concen_ratio, free_Lys_fitting] = gama_Lys(se2, se, data,parameters,Ansatz_,1);
-    if se(end) >  se2(end)
+    if (se2(end) ~= se(end)) || (length(se2) ~= 1)
         Glob_fit_Prot_setting1 = gama_Prot(se,data,parameters,Ansatz_, gama_Lys_best, Concen_ratio, free_Lys_fitting, 1);
     end
 end
