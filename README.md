@@ -30,7 +30,7 @@ We recommend using MATLAB R2014 (The MathWorks, Inc., Natick, Massachusetts, Uni
 
 # Hardware Requirements
 The program can be run on either Linux or windows. A memory size of 4GB is optimum, and higher memory may require depending on the size of the data.
-The current program has been successfully tested with MATLAB R2018 version on the following system: 16 GB memory 3.3 GHz CPU processors with 6 cores.
+The current program has been successfully tested with MATLAB R2019 version on the following system: 16 GB memory 3.3 GHz CPU processors with 6 cores.
 
 # Installation
 Installation of the script is not required. Download all the scripts to any working directory (e.g.,/home/usr/JUMPt). IMPORTANT: All the scripts, including associated modules (associated with the program), should be placed in the same folder. 
