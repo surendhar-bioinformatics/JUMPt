@@ -24,7 +24,7 @@ In this version
 # Software Requirements
 The program was written in MATLAB language. It should run on every system with MATLAB R2014 and above.
 
-- MATLAB toolbox needed: 
+MATLAB toolbox needed: 
 - Global Optimization toolbox along with other basic toolboxes
 
 The program runs on any Linux, Mac, or Windows computer with MATLAB R2014 (The MathWorks, Inc., Natick, Massachusetts, United States) or the above version. The current JUMPt program has been successfully tested with MATLAB R2019 version.
