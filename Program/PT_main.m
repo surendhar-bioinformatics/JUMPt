@@ -8,41 +8,38 @@ fid = fopen('JUMPt.params');
 param = textscan(fid,'%s','delimiter','\n');
 cellfun(@eval,param{1});
 fclose(fid);
-%% read the data
-All_data    = readtable(input_file);
-mask        = startsWith(All_data.Properties.VariableNames, 'data');
-mask3       = startsWith(All_data.Properties.VariableNames, 'Concentration');
-mask2       = startsWith(All_data.Name, 'Lys');
-data.t      = table2array(All_data(1,mask));  
-data.t_long = linspace(0, 32,321);
 
-if any(mask2)
-    data.Lys        = table2array(All_data(mask2,mask));% Lys data
-    data.protInfo   = (All_data(3:end,1:find(mask,1)-1)); % protein IDs
-    data.ProtConc   = table2array(All_data(3:end,mask3))';% Protein concentration
-    SILAC_data      = table2cell(All_data(3:end,mask));% protein data
-    SILAC_data_NaN  = cellfun(@(x) ~isa(x,'double'),SILAC_data); % check for possible 0x0 char reads
-    data.LysConc  = table2array(All_data(2,mask3));
-    SILAC_data(SILAC_data_NaN)   = {NaN};% set those to NaN
-    data.SILAC_data              = cell2mat(SILAC_data)'; % heavy/light ratios,
-else
-    data.protInfo  = (All_data(2:end,1:find(mask,1)-1));
-    data.ProtConc  = table2array(All_data(2:end,mask3))'; 
-    SILAC_data     = table2cell(All_data(2:end,mask));
-    SILAC_data_NaN = cellfun(@(x) ~isa(x,'double'),SILAC_data); 
-    SILAC_data(SILAC_data_NaN)   = {NaN};
-    data.SILAC_data              = cell2mat(SILAC_data)'; 
-end
 parameters.setting1 = Setting_1;
 parameters.setting2 = Setting_2;
 parameters.setting3 = Setting_3;
 parameters.tot_Lys  = Total_Lys_concentration_in_tissue;
-parameters.out_file = out_file;
+parameters.input_file = input_file;
+parameters.out_file   = out_file;
 parameters.prot_per_fit     = Num_prot_in_each_fitting;
-parameters.Num_prot_to_fit  = size(data.SILAC_data,2);
 
-%calling The  main function
-Prot_turnover_v1(data,parameters)
+%Split the proteins into bin
+data = Binning(parameters);
+
+%% Calculate the half-lives with different settings
+
+Glob_fit_Prot = [];
+if parameters.setting3 == 1
+	Glob_fit_Prot_setting3 = gama_Prot(data,parameters,[], 3); %Fitting/optimizing proteins to calculate the half-lives
+end
+
+if parameters.setting2 == 1
+    OptiResStep1 = gama_Lys(data,parameters,2);% Fitting/optimizing proteins with all time points to get the Lys degredation rate 
+    if (data.se2(end) ~= data.se(end)) || (length(data.se) ~= 2)
+        Glob_fit_Prot_setting2 = gama_Prot(data,parameters,OptiResStep1, 2); % Fitting/optimizing proteins to calculate the half-lives
+    end
+end
+
+if parameters.setting1 == 1
+    OptiResStep1 = gama_Lys(data,parameters,1); 
+    if (data.se2(end) ~= data.se(end)) || (length(data.se) ~= 2)
+        Glob_fit_Prot_setting1 = gama_Prot(data,parameters,OptiResStep1,1);
+    end
+end
 
 fprintf('\n *****  Completed exporting half-live to excel file ; Now the Program is complete *******\n\n')
 
