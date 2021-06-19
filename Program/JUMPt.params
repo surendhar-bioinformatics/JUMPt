@@ -1,12 +1,18 @@
-%Parameter file for JUMPt program v2.0.0
-Setting_1 = 0; %Select when user know the measured  SILAC ratios for Proteins alone
-Setting_2 = 0 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys
-Setting_3 = 1 ; %Select when user know the measured  SILAC ratios for Proteins and free_Lys, absolute free_Lys and protein_bound_Lys concentration and Total_Lys_concentration_in_tissue
+%Parameter file for JUMPt program (Version: 2.0.0, Date: 6/10/2021)
+%authors: Surendhar Reddy Chepyala, Junmin Peng
+% modify the parametrs as necessary
+
+setting = 1 ; 
+% setting = 1; input: pSILAC ratios for proteins ; 
+% setting = 2; input: pSILAC ratios for proteins and free_Lys; 
+% setting = 3; input: pSILAC ratios for proteins and free_Lys, absolute concentrations of free-Lys, individual protein bound Lys and total Lys
+
+input_file  = "input_setting_1.xlsx"; %select appropriate input file for different settings
  
-out_file = "Half-lives_test_100p.xlsx"; %Output file is generated with a setting name at the end;(e.g. Half-lives_setting1.xlsx)
+%output file is generated with a prefix 'results_' to the input file name(e.g. results_input_setting_3.xlsx)
 
-input_file  = "test_data.xlsx"; %Input file name
+bin_size = 30; % number of proteins to fit each time; Choose between 50-10; Computation time is faster with the smaller number
 
-Total_Lys_concentration_in_tissue    = 397501; % Absolute concentration of total Lys in a tissue/cell (units: micoM); 0 if not measured
+optimization_algorithm = 1; % 1 = fmincon; 2 = lsqnonlin; 
 
-Num_prot_in_each_fitting = 30; % number of protein to fit each time; Choose between 10-100; Computation time is faster with the smaller number
+purity_of_SILAC_food = 99; %  A value (in %) to represent the purity of SILAC food; ranges between 90-100%
