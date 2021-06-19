@@ -1,4 +1,4 @@
-# Contents of this file
+# Contents
 - Introduction
 - Release notes
 - Software and Hardware Requirements
