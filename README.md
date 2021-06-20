@@ -22,8 +22,7 @@ In the current version
 4. Three different settings, which represents simple to comprehensive inputs 
 
 # Software  and Hardware Requirements
-The program was written in MATLAB language. The program runs on any Linux, Mac, or Windows computer with MATLAB R2014 (The MathWorks, Inc., Natick, Massachusetts, United States) or the above version. The current JUMPt program has been successfully tested with MATLAB R2019 version.
-
+The program was written in MATLAB language. The program runs on any Linux, Mac, or Windows computer with MATLAB R2014 (The MathWorks, Inc., Natick, Massachusetts, United States) or the above version. The current JUMPt program has been successfully tested with MATLAB R2019 version on the following system: 16 GB memory 3.3 GHz CPU processors with 6 cores. The program needs more time to complete on the system with fewer core processors in the CPU.
 MATLAB toolbox needed: 
 - Global Optimization toolbox along with other basic toolboxes
 
