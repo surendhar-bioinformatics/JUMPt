@@ -2,16 +2,16 @@
 %authors: Surendhar Reddy Chepyala, Junmin Peng
 % modify the parametrs as necessary
 
-setting = 1 ; 
+setting = 3 ; 
 % setting = 1; input: pSILAC ratios for proteins ; 
 % setting = 2; input: pSILAC ratios for proteins and free_Lys; 
 % setting = 3; input: pSILAC ratios for proteins and free_Lys, absolute concentrations of free-Lys, individual protein bound Lys and total Lys
 
-input_file  = "input_setting_1.xlsx"; %select appropriate input file for different settings
+input_file  = "input_setting_3.xlsx"; %select appropriate input file for different settings
  
 %output file is generated with a prefix 'results_' to the input file name(e.g. results_input_setting_3.xlsx)
 
-bin_size = 30; % number of proteins to fit each time; Choose between 50-10; Computation time is faster with the smaller number
+bin_size = 30; % number of proteins to fit each time; Choose between 100-10; Computation time is faster with the smaller number
 
 optimization_algorithm = 1; % 1 = fmincon; 2 = lsqnonlin; 
 
